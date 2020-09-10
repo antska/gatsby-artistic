@@ -1,0 +1,73 @@
+{
+  "name": "gatsby-artistic",
+  "private": true,
+  "description": "Gatsby artistic website built with Typescript and styled-components & RevelaJS",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "dev": "gatsby develop -o",
+    "start": "yarn develop",
+    "serve": "gatsby serve",
+    "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore",
+    "lint:fix": "yarn lint --fix",
+    "format": "prettier --write content/**/*.yaml",
+    "type-check": "tsc --noEmit",
+    "test:compile": "tsc --project cypress/tsconfig.json",
+    "test:compile:watch": "tsc --watch --project cypress/tsconfig.json"
+  },
+  "dependencies": {
+    "babel-plugin-styled-components": "^1.11.1",
+    "gatsby": "^2.24.23",
+    "gatsby-image": "^2.4.14",
+    "gatsby-plugin-google-analytics": "^2.3.13",
+    "gatsby-plugin-manifest": "^2.4.21",
+    "gatsby-plugin-netlify": "^2.3.11",
+    "gatsby-plugin-offline": "^3.2.21",
+    "gatsby-plugin-react-helmet": "^3.3.10",
+    "gatsby-plugin-sharp": "^2.6.24",
+    "gatsby-plugin-sitemap": "^2.4.11",
+    "gatsby-plugin-styled-components": "^3.3.10",
+    "gatsby-plugin-typescript": "^2.4.16",
+    "gatsby-source-filesystem": "^2.3.23",
+    "gatsby-transformer-sharp": "^2.5.12",
+    "gatsby-transformer-yaml": "^2.4.10",
+    "polished": "^3.6.5",
+    "react": "^16.13.1",
+    "react-burger-menu": "^2.7.1",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0",
+    "react-spring": "^8.0.27",
+    "styled-components": "^5.1.1",
+    "styled-system": "^5.1.5",
+    "typeface-work-sans": "^0.0.72",
+    "typescript": "^3.9.7"
+  },
+  "devDependencies": {
+    "@types/node": "^10.17.28",
+    "@types/react": "^16.9.44",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-helmet": "^5.0.16",
+    "@types/styled-components": "^5.1.2",
+    "@types/styled-system": "^5.1.10",
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.5",
+    "prettier": "^2.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antska/gatsby-artistic"
+  },
+  "bugs": {
+    "url": "https://github.com/antska/gatsby-artistic/issues"
+  }
+}
