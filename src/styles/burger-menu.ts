@@ -1,13 +1,23 @@
 import { css } from 'styled-components';
 
 const burger = css`
+  .bm-menu {
+    overflow: hidden !important;
+  }
+
   /* Position and sizing of burger button */
   .bm-burger-button {
     position: fixed;
     width: 36px;
     height: 30px;
-    left: 36px;
-    top: 36px;
+    left: 25px;
+    top: 30px;
+
+    &:hover {
+      svg g {
+        fill: #f6993f;
+      }
+    }
   }
 
   /* Color/shape of burger icon bars */

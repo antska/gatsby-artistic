@@ -39,6 +39,7 @@
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
     "react-spring": "^8.0.27",
+    "reveal.js": "^4.0.2",
     "styled-components": "^5.1.1",
     "styled-system": "^5.1.5",
     "typeface-work-sans": "^0.0.72",

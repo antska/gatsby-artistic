@@ -67,6 +67,7 @@ module.exports = {
     'react/no-unescaped-entities': 0,
     'react/prop-types': 0,
     'react/jsx-props-no-spreading': 0,
+    'react/jsx-wrap-multilines': 0,
     'react/jsx-filename-extension': [
       1,
       {

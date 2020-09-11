@@ -92,7 +92,7 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const Main = styled.main`
-  height: calc(100% - 40px);
+  height: calc(100% - 122px);
 `;
 
 const Wrapper = styled.div`
@@ -100,11 +100,11 @@ const Wrapper = styled.div`
 `;
 
 const Footer = styled.footer`
-  height: 40px;
-  margin-left: 10px;
+  font-size: 11px;
+  margin: 13px;
 `;
 
-type LayoutProps = { children: React.ReactNode } & typeof defaultProps;
+type LayoutProps = { children: React.ReactNode };
 
 const Layout = ({ children }: LayoutProps) => (
   <ThemeProvider theme={theme}>

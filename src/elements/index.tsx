@@ -25,6 +25,7 @@ import {
   AlignSelfProps,
   TextAlignProps,
   FontSizeProps,
+  LayoutProps,
 } from 'styled-system';
 
 type BoxProps = SpaceProps &
@@ -119,3 +120,13 @@ export const Button = styled.button<ButtonProps>`
 `;
 
 Button.displayName = 'Button';
+
+type HeaderProps = AlignItemsProps & JustifyContentProps;
+
+export const Header = styled.header<HeaderProps>`
+  display: flex;
+  ${justifyContent}
+  ${alignItems}
+`;
+
+Header.displayName = 'Header';

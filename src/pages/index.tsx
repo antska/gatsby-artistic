@@ -4,6 +4,7 @@ import { useSpring, config } from 'react-spring';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import { AnimatedFlex } from '../elements';
+import RevealWrapper from '../components/RevealWrapper';
 
 const Index: React.FunctionComponent = () => {
   const pageAnimation = useSpring({
@@ -21,7 +22,7 @@ const Index: React.FunctionComponent = () => {
         alignItems="center"
         style={pageAnimation}
       >
-        <h2>Hello Rubens</h2>
+        <RevealWrapper />
       </AnimatedFlex>
     </Layout>
   );
