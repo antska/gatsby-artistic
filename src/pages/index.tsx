@@ -22,7 +22,12 @@ const Index: React.FunctionComponent = () => {
         alignItems="center"
         style={pageAnimation}
       >
-        <RevealWrapper />
+        <RevealWrapper>
+          <section>First slide</section>
+          <section>Second slide</section>
+          <section>Third slide</section>
+          <section>Fourth slide</section>
+        </RevealWrapper>
       </AnimatedFlex>
     </Layout>
   );

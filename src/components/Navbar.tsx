@@ -20,6 +20,7 @@ const Navbar: React.FunctionComponent = () => {
   return (
     <>
       <Menu
+        right
         pageWrapId="page-wrap"
         outerContainerId="outer-container"
         customBurgerIcon={
@@ -44,8 +45,8 @@ const Navbar: React.FunctionComponent = () => {
           </Link>
         ))}
       </Menu>
-      <Header justifyContent="center">
-        <img style={{ marginTop: '10px' }} alt="logo" src={logo} />
+      <Header justifyContent="flex-start">
+        <img style={{ marginTop: 10, marginLeft: 10 }} alt="logo" src={logo} />
       </Header>
     </>
   );

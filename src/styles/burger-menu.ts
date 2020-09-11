@@ -10,7 +10,7 @@ const burger = css`
     position: fixed;
     width: 36px;
     height: 30px;
-    left: 25px;
+    right: 25px;
     top: 30px;
 
     &:hover {

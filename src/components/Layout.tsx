@@ -92,10 +92,12 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const Main = styled.main`
+  background-color: #313131;
   height: calc(100% - 122px);
 `;
 
 const Wrapper = styled.div`
+  background: white;
   height: 100vh;
 `;
 
