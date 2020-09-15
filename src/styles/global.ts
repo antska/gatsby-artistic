@@ -1,12 +1,10 @@
-import React from 'react';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import 'typeface-work-sans';
 
 import theme from '../../config/theme';
-import reset from '../styles/reset';
-import demo from '../styles/demo';
-import burger from '../styles/burger-menu';
-import Navbar from './Navbar';
+import reset from './reset';
+import demo from './demo';
+import burger from './burger-menu';
 
 const GlobalStyles = createGlobalStyle`
   *::before,
@@ -15,7 +13,7 @@ const GlobalStyles = createGlobalStyle`
   }
   ::selection {
     color: white;
-    background-color: #f6993f;
+    background-color: #c2292e;
   }
   html {
     box-sizing: border-box;
@@ -88,39 +86,38 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  .svg-icon {
+    width: 12em;
+    height: 12em;
+  }
+  
+  .svg-icon path,
+  .svg-icon polygon,
+  .svg-icon rect {
+    fill: #4691f6;
+  }
+  
+  .svg-icon circle {
+    stroke: #4691f6;
+    stroke-width: 1;
+  }
+
+  .ml12 {
+    font-weight: 200;
+    font-size: 1.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    color: #c2292e;
+  }
+  
+  .ml12 .letter {
+    display: inline-block;
+    line-height: 1em;
+  }
+
   ${demo}
   ${reset}
   ${burger}
 `;
 
-const Main = styled.main`
-  background-color: #313131;
-  height: calc(100% - 122px);
-`;
-
-const Wrapper = styled.div`
-  background: white;
-  height: 100vh;
-`;
-
-const Footer = styled.footer`
-  font-size: 11px;
-  margin: 13px;
-`;
-
-type LayoutProps = { children: React.ReactNode };
-
-const Layout = ({ children }: LayoutProps) => (
-  <ThemeProvider theme={theme}>
-    <>
-      <GlobalStyles />
-      <Wrapper id="outer-container">
-        <Navbar />
-        <Main id="page-wrap">{children}</Main>
-        <Footer>© Copyright afterRubens 2020</Footer>
-      </Wrapper>
-    </>
-  </ThemeProvider>
-);
-
-export default Layout;
+export default GlobalStyles;

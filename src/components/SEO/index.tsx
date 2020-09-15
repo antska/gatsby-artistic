@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, withPrefix } from 'gatsby';
 import Facebook from './Facebook';
 import Twitter from './Twitter';
 
@@ -201,6 +201,9 @@ const SEO = ({
           </script>
         )}
         <script type="application/ld+json">{JSON.stringify(breadcrumb)}</script>
+        <script src="anime.min.js" type="text/javascript" />
+        <script src="imagesloaded.pkgd.min.js" type="text/javascript" />
+        <script src={withPrefix('main.js')} type="text/javascript" defer />
       </Helmet>
       <Facebook
         desc={seo.description}
