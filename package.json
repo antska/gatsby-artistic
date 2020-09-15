@@ -36,6 +36,7 @@
     "gatsby-transformer-sharp": "^2.5.12",
     "gatsby-transformer-yaml": "^2.4.10",
     "imagesloaded": "^4.1.4",
+    "lodash": "^4.17.20",
     "polished": "^3.6.5",
     "react": "^16.13.1",
     "react-burger-menu": "^2.7.1",

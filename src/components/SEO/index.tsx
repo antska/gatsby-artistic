@@ -201,9 +201,6 @@ const SEO = ({
           </script>
         )}
         <script type="application/ld+json">{JSON.stringify(breadcrumb)}</script>
-        <script src="anime.min.js" type="text/javascript" />
-        <script src="imagesloaded.pkgd.min.js" type="text/javascript" />
-        <script src={withPrefix('main.js')} type="text/javascript" defer />
       </Helmet>
       <Facebook
         desc={seo.description}
