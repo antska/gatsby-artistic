@@ -1,5 +1,12 @@
 module.exports = {
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
+  settings: {
+    'import/resolver': {
+      node: {
+        moduleDirectory: ['node_modules', 'src'],
+      },
+    },
+  },
   extends: [
     'airbnb',
     'plugin:@typescript-eslint/recommended',
@@ -89,6 +96,7 @@ module.exports = {
         trailingComma: 'all',
         semi: true,
         singleQuote: true,
+        endOfLine: 'auto',
       },
     ],
     'jsx-a11y/href-no-hash': 'off',

@@ -30,6 +30,13 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
+        name: 'rooms',
+        path: `${__dirname}/content/rooms`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
         name: 'config',
         path: `${__dirname}/config`,
       },
@@ -50,6 +57,7 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sitemap',
+    'gatsby-plugin-resolve-src',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
