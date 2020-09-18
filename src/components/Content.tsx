@@ -1,87 +1,55 @@
+import { navigate } from 'gatsby';
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
-const Content = ({ rooms, isMoving, onRemoveTilt }) => {
-  const [currentRoom, setCurrentRoom] = useState(0);
+const Content = ({
+  room,
+  isMoving,
+  isZoomed,
+  onGoBack,
+  onRemoveTilt,
+  onMove,
+  scrollerRef,
+  onToggleMenu,
+  isMenuOpen,
+  isInfoOpen,
+}) => {
   const [isNavigating, setIsNavigating] = useState(false);
 
-  const navigate = (dir: string) => {
+  const handleNavigate = (dir: string) => {
     if (isMoving || isNavigating) {
       return false;
     }
     setIsNavigating(true);
 
-    const totalRooms = rooms.length;
-    const room = rooms[currentRoom];
+    onRemoveTilt();
 
-    // Remove tilt.
-    onRemoveTilt(false);
-
-    // Update currentRoom.
-    if (dir === 'next') {
-      setCurrentRoom(currentRoom < totalRooms - 1 ? currentRoom + 1 : 0);
-    } else {
-      setCurrentRoom(currentRoom > 0 ? currentRoom - 1 : totalRooms - 1);
-    }
-
-    // DOM.roomDesc.textContent = `Room ${currentRoom + 1}`;
-
-    // Position the next room.
-    const nextRoom = rooms[currentRoom];
-    nextRoom.style.transform = `translate3d(${
-      dir === 'next' ? 140 : -140
-    }%,0,0) translate3d(${dir === 'next' ? 1 : -1}px,0,0)`;
-    nextRoom.style.opacity = 1;
-
-    // Move back.
-    // move({ transition: roomTransition, transform: resetTransform })
-    //   .then(function () {
-    //     // Move left or right.
-    //     return move({
-    //       transform: {
-    //         translateX: `${dir === 'next' ? -140 : 140}%`,
-    //         translateY: 0,
-    //         translateZ: 0,
-    //         rotateX: 0,
-    //         rotateY: 0,
-    //         rotateZ: 0,
-    //       },
-    //     });
-    //   })
-    //   .then(function () {
-    //     // Update current room class.
-    //     nextRoom.classList.add('room--current');
-    //     room.classList.remove('room--current');
-    //     room.style.opacity = 0;
-
-    //     // Show the next slide.
-    //     // showSlide();
-
-    //     // Move into room.
-    //     // Update final transform state:
-    //     return move({
-    //       transform: {
-    //         translateX: `${dir === 'next' ? -140 : 140}%`,
-    //         translateY: 0,
-    //         translateZ: '500px',
-    //         rotateX: 0,
-    //         rotateY: 0,
-    //         rotateZ: 0,
-    //       },
-    //     });
-    //   })
-    //   .then(function () {
-    //     // Reset positions.
-    //     applyRoomTransition('none');
-    //     nextRoom.style.transform = 'translate3d(0,0,0)';
-    //     applyRoomTransform(initTransform);
-
-    //     setTimeout(function () {
-    //       initTilt();
-    //     }, 60);
-    //     setIsNavigating(false);
-    //   });
+    onMove(scrollerRef.current, {
+      transform: {
+        translateX: 0,
+        translateY: 0,
+        translateZ: 0,
+        rotateX: 0,
+        rotateY: 0,
+        rotateZ: 0,
+      },
+      stopTransition: true,
+    }).then(() => {
+      setTimeout(() => {
+        if (dir === 'left') {
+          navigate(room.prev, { replace: true });
+        } else {
+          navigate(room.next, { replace: true });
+        }
+      }, 500);
+    });
   };
+
+  const toggle = useCallback(() => {
+    if (!isMoving) {
+      onToggleMenu(!isMenuOpen);
+    }
+  }, [isMoving, isMenuOpen, onToggleMenu]);
 
   return (
     <>
@@ -108,23 +76,99 @@ const Content = ({ rooms, isMoving, onRemoveTilt }) => {
               The Strange Story of the Samson and Delilah
             </p>
           </div>
-          <button type="button" className="btn btn--info btn--toggle">
-            <svg className="icon icon--info">
-              <use href="#icon-info" />
+          {!isZoomed && (
+            <button
+              type="button"
+              className={`btn btn--info btn--toggle ${
+                isInfoOpen ? 'btn--active' : ''
+              }`}
+              // onClick={openInfo}
+            >
+              <svg className="icon icon--info">
+                <use href="#icon-info" />
+              </svg>
+              <svg className="icon icon--cross">
+                <use href="#icon-cross" />
+              </svg>
+            </button>
+          )}
+          {!isZoomed && !isMoving && (
+            <button
+              type="button"
+              className={`btn btn--menu btn--toggle ${
+                isMenuOpen ? 'btn--active' : ''
+              }`}
+              onClick={toggle}
+            >
+              <svg className="icon icon--menu">
+                <use href="#icon-menu" />
+              </svg>
+              <svg className="icon icon--cross">
+                <use href="#icon-cross" />
+              </svg>
+            </button>
+          )}
+          {isMoving && (
+            <svg
+              width="44"
+              height="44"
+              viewBox="0 0 44 44"
+              xmlns="http://www.w3.org/2000/svg"
+              stroke="#fff"
+            >
+              <g fill="none" fillRule="evenodd" strokeWidth="2">
+                <circle cx="22" cy="22" r="1">
+                  <animate
+                    attributeName="r"
+                    begin="0s"
+                    dur="1.8s"
+                    values="1; 20"
+                    calcMode="spline"
+                    keyTimes="0; 1"
+                    keySplines="0.165, 0.84, 0.44, 1"
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="stroke-opacity"
+                    begin="0s"
+                    dur="1.8s"
+                    values="1; 0"
+                    calcMode="spline"
+                    keyTimes="0; 1"
+                    keySplines="0.3, 0.61, 0.355, 1"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle cx="22" cy="22" r="1">
+                  <animate
+                    attributeName="r"
+                    begin="-0.9s"
+                    dur="1.8s"
+                    values="1; 20"
+                    calcMode="spline"
+                    keyTimes="0; 1"
+                    keySplines="0.165, 0.84, 0.44, 1"
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="stroke-opacity"
+                    begin="-0.9s"
+                    dur="1.8s"
+                    values="1; 0"
+                    calcMode="spline"
+                    keyTimes="0; 1"
+                    keySplines="0.3, 0.61, 0.355, 1"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+              </g>
             </svg>
-            <svg className="icon icon--cross">
-              <use href="#icon-cross" />
-            </svg>
-          </button>
-          <button type="button" className="btn btn--menu btn--toggle">
-            <svg className="icon icon--menu">
-              <use href="#icon-menu" />
-            </svg>
-            <svg className="icon icon--cross">
-              <use href="#icon-cross" />
-            </svg>
-          </button>
-          <div className="overlay overlay--menu">
+          )}
+          <div
+            className={`overlay overlay--menu ${
+              isMenuOpen ? 'overlay--active' : ''
+            }`}
+          >
             <ul className="menu">
               <li className="menu__item">
                 <a className="menu__link" href="#">
@@ -207,48 +251,63 @@ const Content = ({ rooms, isMoving, onRemoveTilt }) => {
         <h4 className="location">
           Euphrosyne Doxiades - Samson and Delilah painting
         </h4>
-        <nav className="nav">
-          <button
-            title="Go left"
-            type="button"
-            className="btn btn--nav btn--nav-left"
-          >
-            <svg
-              className="nav-icon nav-icon--left"
-              width="42px"
-              height="12px"
-              viewBox="0 0 70 20"
+        <nav
+          className="nav"
+          style={{
+            justifyContent: isZoomed ? 'center' : '',
+          }}
+        >
+          {!isZoomed && room.prev && (
+            <button
+              onClick={() => handleNavigate('left')}
+              title="Go left"
+              type="button"
+              className="btn btn--nav btn--nav-left"
             >
-              <path className="nav__triangle" d="M52.5,10L70,0v20L52.5,10z" />
-              <path className="nav__line" d="M55.1,11.4H0V8.6h55.1V11.4z" />
-            </svg>
-          </button>
-          <h2 className="room-desc info-title" style={{ fontSize: '1em' }}>
-            Room 1
-          </h2>
-          <button
-            hidden
-            title="Go in front"
-            type="button"
-            className="btn btn--nav btn--go-back"
-          >
-            GO BACK
-          </button>
-          <button
-            title="Go Right"
-            type="button"
-            className="btn btn--nav btn--nav-right"
-          >
-            <svg
-              className="nav-icon nav-icon--right"
-              width="42px"
-              height="12px"
-              viewBox="0 0 70 20"
+              <svg
+                className="nav-icon nav-icon--left"
+                width="42px"
+                height="12px"
+                viewBox="0 0 70 20"
+              >
+                <path className="nav__triangle" d="M52.5,10L70,0v20L52.5,10z" />
+                <path className="nav__line" d="M55.1,11.4H0V8.6h55.1V11.4z" />
+              </svg>
+            </button>
+          )}
+          {!isZoomed && (
+            <h2 className="room-desc info-title" style={{ fontSize: '1em' }}>
+              {room.title}
+            </h2>
+          )}
+          {isZoomed && (
+            <button
+              title="Go back"
+              type="button"
+              className="btn btn--nav btn--go-back"
+              onClick={onGoBack}
             >
-              <path className="nav__triangle" d="M52.5,10L70,0v20L52.5,10z" />
-              <path className="nav__line" d="M55.1,11.4H0V8.6h55.1V11.4z" />
-            </svg>
-          </button>
+              GO BACK
+            </button>
+          )}
+          {!isZoomed && room.next && (
+            <button
+              onClick={() => handleNavigate('right')}
+              title="Go Right"
+              type="button"
+              className="btn btn--nav btn--nav-right"
+            >
+              <svg
+                className="nav-icon nav-icon--right"
+                width="42px"
+                height="12px"
+                viewBox="0 0 70 20"
+              >
+                <path className="nav__triangle" d="M52.5,10L70,0v20L52.5,10z" />
+                <path className="nav__line" d="M55.1,11.4H0V8.6h55.1V11.4z" />
+              </svg>
+            </button>
+          )}
         </nav>
       </div>
     </>

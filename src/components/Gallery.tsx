@@ -1,64 +1,103 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Img from 'gatsby-image';
 
 const Gallery = React.forwardRef<HTMLDivElement>(
-  ({ rooms, onSetIsMoving }, ref) => {
-    const temp = '';
+  ({ room, images, isZoomed, onZoom, onSetIsMoving, resolverRef }, ref) => {
+    const [leftZoom, setLeftZoom] = useState(false);
+    const [rightZoom, setRightZoom] = useState(false);
+    const [backZoom, setBackZoom] = useState(false);
+
+    useEffect(() => {
+      if (!isZoomed) {
+        setLeftZoom(false);
+        setRightZoom(false);
+        setBackZoom(false);
+      }
+    }, [isZoomed]);
 
     return (
       <div className="container">
         <div
           className="scroller"
           ref={ref}
-          onTransitionEnd={() => onSetIsMoving(false)}
+          onTransitionEnd={() => {
+            resolverRef.current();
+            onSetIsMoving(false);
+          }}
         >
-          {rooms.slice(0, 1).map((room) => (
-            <div key={room.title} className="room room--current">
-              <div className="room__side room__side--back">
-                <img
-                  src="/room1/the_painting.jpg"
-                  className="room__img"
-                  alt="Room img"
-                />
-                <h3 className="room__img--desc">
-                  Rubens was a painters’ painter, famous in his own lifetime for
-                  his outstanding draughtsmanship and attention to detail. Yet
-                  on close inspection, details in the Samson and Delilah show
-                  themselves to be crudely painted, to our minds unable to bear
-                  comparison with undisputed works of his from any period.
-                </h3>
-              </div>
-              <div className="room__side room__side--left">
-                <img
-                  src="/room1/rubens_portrait.jpg"
-                  className="room__img"
-                  alt="Room img"
-                />
-                <h3 className="room__img--desc">
-                  The first is that Rubens painted a Samson and Delilah in the
-                  year or so after his return from Italy at the end of 1608. It
-                  hung in the house of his friend and patron Nicolaas Rockox,
-                  several times burgomaster of Antwerp, and one of the most
-                  cultured and influential figures in the city. The painting is
-                  mentioned in an inventory, and as we have seen in the The
-                  Eyewitnesses, was recorded by 2 artists while Rubens and
-                  Rockox still lived.
-                </h3>
-              </div>
-              <div className="room__side room__side--right">
-                <h3 className="room__img--desc">
-                  The painting is mentioned in an inventory, and as we have seen
-                  in the The Eyewitnesses, was recorded by 2 artists while
-                  Rubens and Rockox still lived.
-                </h3>
-                <img
-                  src="/room1/other_painting.jpg"
-                  className="room__img"
-                  alt="Room img"
-                />
-              </div>
-              <div className="room__side room__side--bottom" />
+          <div key={room.title} className="room room--current">
+            <div
+              className={`room__side room__side--back ${
+                backZoom && isZoomed ? 'room_zoomed' : ''
+              }`}
+              onClick={() => {
+                if (!backZoom) {
+                  onZoom();
+                  setBackZoom(true);
+                  setLeftZoom(false);
+                  setRightZoom(false);
+                }
+              }}
+            >
+              <Img
+                fluid={images.nodes[2].childImageSharp.fluid}
+                className="room__img"
+                alt="Room img"
+              />
+              <p
+                className="room__img--desc"
+                style={{ width: isZoomed ? 'auto' : '' }}
+              >
+                {room.centerWallText}
+              </p>
             </div>
-          ))}
+            <div
+              className={`room__side room__side--left ${
+                leftZoom && isZoomed ? 'room_zoomed' : ''
+              }`}
+              onClick={() => {
+                if (!leftZoom) {
+                  onZoom();
+                  setLeftZoom(true);
+                  setRightZoom(false);
+                  setBackZoom(false);
+                }
+              }}
+            >
+              <Img
+                fluid={images.nodes[1].childImageSharp.fluid}
+                className="room__img"
+                alt="Room img"
+              />
+              <p className="room__img--desc">{room.leftWallText}</p>
+            </div>
+            <div
+              className={`room__side room__side--right ${
+                rightZoom && isZoomed ? 'room_zoomed' : ''
+              }`}
+              onClick={() => {
+                if (!rightZoom) {
+                  onZoom();
+                  setRightZoom(true);
+                  setLeftZoom(false);
+                  setBackZoom(false);
+                }
+              }}
+            >
+              <p
+                className="room__img--desc"
+                style={{ marginRight: 0, marginLeft: '4%' }}
+              >
+                {room.rightWallText}
+              </p>
+              <Img
+                fluid={images.nodes[0].childImageSharp.fluid}
+                className="room__img"
+                alt="Room img"
+              />
+            </div>
+            <div className="room__side room__side--bottom" />
+          </div>
         </div>
       </div>
     );

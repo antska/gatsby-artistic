@@ -1,16 +1,96 @@
-- title: 'Room 1'
+- title: 'Intro'
   title_detail: 'Room 1 - In all its glory'
   desc: "Color (American English), or colour (Commonwealth English), is the characteristic of human visual perception described through color categories, with names such as red, orange, yellow, green, blue, or purple. This perception of color derives from the stimulation of cone cells in the human eye by electromagnetic radiation in the visible spectrum. Color categories and physical specifications of color are associated with objects through the wavelength of the light that is reflected from them. This reflection is governed by the object's physical properties such as light absorption, emission spectra, etc."
-  images: ['./room1/1.jpg', './room1/2.jpg', './room1/3.jpg', './room1/4.jpg']
+  images: 'room1'
+  slug: '/'
+  prev: ''
+  next: '/room2'
+  leftWallText: 'The first is that Rubens painted a Samson and Delilah in the
+    year or so after his return from Italy at the end of 1608. It
+    hung in the house of his friend and patron Nicolaas Rockox,
+    several times burgomaster of Antwerp, and one of the most
+    cultured and influential figures in the city. The painting is
+    mentioned in an inventory, and as we have seen in the The
+    Eyewitnesses, was recorded by 2 artists while Rubens and Rockox
+    still lived.'
+  centerWallText:
+    'Rubens was a painters’ painter, famous in his own lifetime for
+    his outstanding draughtsmanship and attention to detail. Yet on
+    close inspection, details in the Samson and Delilah show
+    themselves to be crudely painted, to our minds unable to bear
+    comparison with undisputed works of his from any period.'
+  rightWallText: 'The painting is mentioned in an inventory, and as we have seen
+    in the The Eyewitnesses, was recorded by 2 artists while Rubens
+    and Rockox still lived.'
 - title: 'Room 2'
   title_detail: 'Room 2 - In all its glory'
   desc: "Color (American English), or colour (Commonwealth English), is the characteristic of human visual perception described through color categories, with names such as red, orange, yellow, green, blue, or purple. This perception of color derives from the stimulation of cone cells in the human eye by electromagnetic radiation in the visible spectrum. Color categories and physical specifications of color are associated with objects through the wavelength of the light that is reflected from them. This reflection is governed by the object's physical properties such as light absorption, emission spectra, etc."
-  images: ['./room2/1.jpg', './room2/2.jpg', './room2/3.jpg', './room2/4.jpg']
+  images: 'room2'
+  slug: '/room2'
+  prev: '/'
+  next: '/room3'
+  leftWallText: 'The first is that Rubens painted a Samson and Delilah in the
+    year or so after his return from Italy at the end of 1608. It
+    hung in the house of his friend and patron Nicolaas Rockox,
+    several times burgomaster of Antwerp, and one of the most
+    cultured and influential figures in the city. The painting is
+    mentioned in an inventory, and as we have seen in the The
+    Eyewitnesses, was recorded by 2 artists while Rubens and Rockox
+    still lived.'
+  centerWallText:
+    'Rubens was a painters’ painter, famous in his own lifetime for
+    his outstanding draughtsmanship and attention to detail. Yet on
+    close inspection, details in the Samson and Delilah show
+    themselves to be crudely painted, to our minds unable to bear
+    comparison with undisputed works of his from any period.'
+  rightWallText: 'The painting is mentioned in an inventory, and as we have seen
+    in the The Eyewitnesses, was recorded by 2 artists while Rubens
+    and Rockox still lived.'
 - title: 'Room 3'
   title_detail: 'Room 3 - In all its glory'
   desc: "Color (American English), or colour (Commonwealth English), is the characteristic of human visual perception described through color categories, with names such as red, orange, yellow, green, blue, or purple. This perception of color derives from the stimulation of cone cells in the human eye by electromagnetic radiation in the visible spectrum. Color categories and physical specifications of color are associated with objects through the wavelength of the light that is reflected from them. This reflection is governed by the object's physical properties such as light absorption, emission spectra, etc."
-  images: ['./room3/1.jpg', './room3/2.jpg', './room3/3.jpg', './room3/4.jpg']
-- title: 'Room 4'
+  images: 'room3'
+  slug: '/room3'
+  prev: '/room2'
+  next: '/room4'
+  leftWallText: 'The first is that Rubens painted a Samson and Delilah in the
+    year or so after his return from Italy at the end of 1608. It
+    hung in the house of his friend and patron Nicolaas Rockox,
+    several times burgomaster of Antwerp, and one of the most
+    cultured and influential figures in the city. The painting is
+    mentioned in an inventory, and as we have seen in the The
+    Eyewitnesses, was recorded by 2 artists while Rubens and Rockox
+    still lived.'
+  centerWallText:
+    'Rubens was a painters’ painter, famous in his own lifetime for
+    his outstanding draughtsmanship and attention to detail. Yet on
+    close inspection, details in the Samson and Delilah show
+    themselves to be crudely painted, to our minds unable to bear
+    comparison with undisputed works of his from any period.'
+  rightWallText: 'The painting is mentioned in an inventory, and as we have seen
+    in the The Eyewitnesses, was recorded by 2 artists while Rubens
+    and Rockox still lived.'
+- title: 'Finale'
   title_detail: 'Room 4 - In all its glory'
   desc: "Color (American English), or colour (Commonwealth English), is the characteristic of human visual perception described through color categories, with names such as red, orange, yellow, green, blue, or purple. This perception of color derives from the stimulation of cone cells in the human eye by electromagnetic radiation in the visible spectrum. Color categories and physical specifications of color are associated with objects through the wavelength of the light that is reflected from them. This reflection is governed by the object's physical properties such as light absorption, emission spectra, etc."
-  images: ['./room4/1.jpg', './room4/2.jpg', './room4/3.jpg', './room4/4.jpg']
+  images: 'room4'
+  slug: '/room4'
+  prev: '/room3'
+  next: ''
+  leftWallText: 'The first is that Rubens painted a Samson and Delilah in the
+    year or so after his return from Italy at the end of 1608. It
+    hung in the house of his friend and patron Nicolaas Rockox,
+    several times burgomaster of Antwerp, and one of the most
+    cultured and influential figures in the city. The painting is
+    mentioned in an inventory, and as we have seen in the The
+    Eyewitnesses, was recorded by 2 artists while Rubens and Rockox
+    still lived.'
+  centerWallText:
+    'Rubens was a painters’ painter, famous in his own lifetime for
+    his outstanding draughtsmanship and attention to detail. Yet on
+    close inspection, details in the Samson and Delilah show
+    themselves to be crudely painted, to our minds unable to bear
+    comparison with undisputed works of his from any period.'
+  rightWallText: 'The painting is mentioned in an inventory, and as we have seen
+    in the The Eyewitnesses, was recorded by 2 artists while Rubens
+    and Rockox still lived.'

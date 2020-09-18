@@ -97,7 +97,7 @@ const demo = css`
   .btn--go-back {
     font-size: 1rem;
     // visibility: hidden;
-    opacity: 0;
+    // opacity: 0;
     transition: opacity 700ms ease-in;
   }
 
@@ -215,22 +215,34 @@ const demo = css`
     top: 100%;
   }
 
+  .room_zoomed {
+    width: 100vw;
+    transform: rotate3d(0, 1, 0, 0);
+    justify-content: flex-start;
+    cursor: auto;
+  }
+
   /* Inner elements */
   .room__img {
     border: 10px solid #483023;
     flex: none;
-    max-width: 40%;
+    // max-width: 40%;
     max-height: 60%;
+    max-width: 700px;
     margin: 0 5%;
     transform: translate3d(0, 0, 10px);
     backface-visibility: hidden;
+    width: 100%;
+    // height: 100%;
   }
 
   .room__img--desc {
+    font-size: 2vw;
     font-weight: 400;
-    margin-left: 4%;
-    margin-right: 12%;
-    width: 30%;
+    // margin-left: 4%;
+    // margin-right: 12%;
+    margin-right: 5%;
+    // width: 30%;
   }
 
   /* Content */

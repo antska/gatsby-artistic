@@ -73,7 +73,7 @@ const GlobalStyles = createGlobalStyle`
     color: black;
     font-family: 'Work Sans', '-apple-system', 'Roboto', 'Helvetica', 'Arial', sans-serif;
     background: white;
-    font-size: 18px;
+    font-size: 18px;    
   }
   a {
     transition: all 0.3s ease-in-out;

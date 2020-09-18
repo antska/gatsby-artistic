@@ -4,7 +4,7 @@ export const initTransition = { speed: '0.9s', easing: 'ease' };
 export const roomTransition = { speed: '0.8s', easing: 'ease' };
 // View from top transition.
 export const menuTransition = {
-  speed: '1.5s',
+  speed: '0.5s',
   easing: 'cubic-bezier(0.2,1,0.3,1)',
 };
 // Info transition.
