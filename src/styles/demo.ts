@@ -227,7 +227,7 @@ const demo = css`
     border: 10px solid #483023;
     flex: none;
     // max-width: 40%;
-    max-height: 60%;
+    max-height: 80%;
     max-width: 700px;
     margin: 0 5%;
     transform: translate3d(0, 0, 10px);
@@ -325,7 +325,7 @@ const demo = css`
 
   /* Location */
   .location {
-    font-size: 1.165em;
+    font-size: 1em;
     font-weight: normal;
     position: absolute;
     top: 0;
@@ -456,6 +456,7 @@ const demo = css`
   }
 
   .menu {
+    text-align: center;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -465,7 +466,7 @@ const demo = css`
     font-size: 7vh;
     margin: 0.25em 0;
     padding: 0;
-    text-transform: lowercase;
+    text-transform: uppercase;
   }
 
   .menu__item--current {
@@ -485,14 +486,28 @@ const demo = css`
     color: white;
     font-size: 1.2em;
     line-height: 1.4;
-    width: 60vw;
+    width: 70vw;
     min-width: calc(320px - 2em);
     max-width: 900px;
     margin: 0;
     padding: 1em;
+    overflow: auto;
+    max-height: 80vh;
+    text-align: justify;
   }
 
   .info-title {
+    font-size: 2.5em;
+    font-weight: normal;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    color: #ab262b;
+    margin-bottom: 20px;
+    // background-color: #ab262b;
+  }
+
+  .room-title {
     font-size: 1.5em;
     font-weight: normal;
     text-align: center;

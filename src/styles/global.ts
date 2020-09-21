@@ -85,6 +85,12 @@ const GlobalStyles = createGlobalStyle`
       color: ${theme.colors.primary};
     }
   }
+  ul{   
+    margin-inline-start: 1em;
+  }
+  li{
+    margin: 1em 0;
+  }
 
   .svg-icon {
     width: 12em;
