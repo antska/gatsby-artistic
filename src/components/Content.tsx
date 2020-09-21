@@ -1,4 +1,4 @@
-import { navigate } from 'gatsby';
+import { graphql, navigate, useStaticQuery } from 'gatsby';
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useCallback, useState } from 'react';
 
@@ -15,6 +15,22 @@ const Content = ({
   isInfoOpen,
 }) => {
   const [isNavigating, setIsNavigating] = useState(false);
+  const [info, setInfo] = useState({
+    title: '',
+    desc: '',
+    md: undefined,
+  });
+  const { navigation } = useStaticQuery(graphql`
+    query Nav {
+      navigation: allNavigationYaml {
+        nodes {
+          title
+          desc
+          md
+        }
+      }
+    }
+  `);
 
   const handleNavigate = (dir: string) => {
     if (isMoving || isNavigating) {
@@ -46,10 +62,13 @@ const Content = ({
   };
 
   const toggle = useCallback(() => {
-    if (!isMoving) {
+    if (info.title) {
+      setInfo({ ...info, title: '', desc: '', md: undefined });
+    }
+    if (!isMoving && !info.title) {
       onToggleMenu(!isMenuOpen);
     }
-  }, [isMoving, isMenuOpen, onToggleMenu]);
+  }, [info, isMoving, isMenuOpen, onToggleMenu]);
 
   return (
     <>
@@ -76,22 +95,6 @@ const Content = ({
               The Strange Story of the Samson and Delilah
             </p>
           </div>
-          {!isZoomed && (
-            <button
-              type="button"
-              className={`btn btn--info btn--toggle ${
-                isInfoOpen ? 'btn--active' : ''
-              }`}
-              // onClick={openInfo}
-            >
-              <svg className="icon icon--info">
-                <use href="#icon-info" />
-              </svg>
-              <svg className="icon icon--cross">
-                <use href="#icon-cross" />
-              </svg>
-            </button>
-          )}
           {!isZoomed && !isMoving && (
             <button
               type="button"
@@ -166,87 +169,50 @@ const Content = ({
           )}
           <div
             className={`overlay overlay--menu ${
-              isMenuOpen ? 'overlay--active' : ''
+              isMenuOpen || info.title ? 'overlay--active' : ''
             }`}
           >
-            <ul className="menu">
-              <li className="menu__item">
-                <a className="menu__link" href="#">
-                  Eyewitnesses
-                </a>
-              </li>
-              <li className="menu__item">
-                <a className="menu__link" href="#">
-                  Provenance
-                </a>
-              </li>
-              <li className="menu__item">
-                <a className="menu__link" href="#">
-                  The debate so far
-                </a>
-              </li>
-              <li className="menu__item">
-                <a className="menu__link" href="#">
-                  Our aims
-                </a>
-              </li>
-              <li className="menu__item">
-                <a className="menu__link" href="#">
-                  Resources
-                </a>
-              </li>
-            </ul>
+            {!info.title && (
+              <ul className="menu">
+                {navigation.nodes.map((nav) => (
+                  <li key={nav.title} className="menu__item">
+                    <a
+                      className="menu__link"
+                      href="#"
+                      onClick={() =>
+                        setInfo({
+                          ...info,
+                          title: nav.title,
+                          desc: nav.desc,
+                          md: nav.md,
+                        })
+                      }
+                    >
+                      {nav.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
-          <div className="overlay overlay--info room__subject">
-            <h4 className="info-title">Room 1</h4>
-            <p className="info">
-              &ldquo;Life in Pieces&rdquo; is the subject of all exhibitions
-              taking place in the Mirai Art Gallery in 2017. Fragments of lost
-              memories, fleeting moments and the breaking apart of human nature
-              are this year's highlighted topics. We welcome you to a
-              exploration space of a unique kind&mdash;the one that will stay
-              with you and impact you on many levels. Come visit us.
+          <div
+            className={`overlay overlay--info menu__eyewitnesses ${
+              info.title && isMenuOpen ? 'overlay--active' : ''
+            }`}
+          >
+            {/* <div> */}
+            <h4 className="info-title">{info.title}</h4>
+            <p
+              className="info"
+              dangerouslySetInnerHTML={
+                info.md ? { __html: info.md } : undefined
+              }
+            >
+              {info.desc}
             </p>
+            {/* <p className="info">{info.desc}</p> */}
           </div>
-          <div className="overlay overlay--info menu__eyewitnesses">
-            <h4 className="info-title">Eyewitnesses</h4>
-            <p className="info">
-              In looking at the National Gallery’s Samson and Delilah we are
-              particularly fortunate to have the visual testimony of two
-              eyewitnesses. Two artists, both contemporaries of Rubens and the
-              painting’s owner Nicholas Rockox, made separate copies of Rubens’
-              original painting early in the 17th century. Their copies survive
-              to this day, and agree on major points of composition which are
-              strikingly different to that of the painting hanging in the
-              National Gallery. No reasonable explanation for this has ever been
-              given.
-            </p>
-          </div>
-          <div className="overlay overlay--info menu__provenance">
-            <h4 className="info-title">Provenance</h4>
-            <p className="info">
-              The Samson and Delilah’s provenance – its whereabouts over the
-              years – is complex and uncertain. In reality, there are only two
-              things of which we can be absolutely certain. The first is that
-              Rubens painted a Samson and Delilah in the year or so after his
-              return from Italy at the end of 1608. It hung in the house of his
-              friend and patron Nicolaas Rockox, several times burgomaster of
-              Antwerp, and one of the most cultured and influential figures in
-              the city. The painting is mentioned in an inventory, and as we
-              have seen in the The Eyewitnesses, was recorded by 2 artists while
-              Rubens and Rockox still lived. The year following Rockox’s death
-              in 1640, the painting was auctioned off along with the rest of his
-              property for the benefit of the poor. Now while there are various
-              isolated references to similar sounding paintings later in the 17
-              th century, this is the last cast-iron reference to Rubens’
-              original Samson and Delilah. The second certain fact is that the
-              painting that hangs in the National Gallery today (whether or not
-              you believe it to be the same painting that disappeared in 1641)
-              was discovered by the art dealer Curt Benedict in the hands of a
-              restorer in Paris in 1929, and was at first attributed to the 17th
-              century Dutch painter Gerrit van Honthorst.
-            </p>
-          </div>
+          {/* </div> */}
         </header>
         <h4 className="location">
           Euphrosyne Doxiades - Samson and Delilah painting
@@ -276,7 +242,7 @@ const Content = ({
             </button>
           )}
           {!isZoomed && (
-            <h2 className="room-desc info-title" style={{ fontSize: '1em' }}>
+            <h2 className="room-desc room-title" style={{ fontSize: '1em' }}>
               {room.title}
             </h2>
           )}

@@ -15,7 +15,7 @@ interface QueryResult {
 }
 
 const Navbar: React.FunctionComponent = () => {
-  const data: QueryResult = useStaticQuery(query);
+  // const data: QueryResult = useStaticQuery(query);
 
   return (
     <>
@@ -39,11 +39,11 @@ const Navbar: React.FunctionComponent = () => {
           </svg>
         }
       >
-        {data.navigation.nodes.map((item) => (
+        {/* {data.navigation.nodes.map((item) => (
           <Link className="menu-item" to={item.link} key={item.name}>
             {item.name}
           </Link>
-        ))}
+        ))} */}
       </Menu>
       <Header justifyContent="flex-start">
         <img style={{ marginTop: 10, marginLeft: 10 }} alt="logo" src={logo} />
@@ -54,13 +54,13 @@ const Navbar: React.FunctionComponent = () => {
 
 export default Navbar;
 
-const query = graphql`
-  query Layout {
-    navigation: allNavigationYaml {
-      nodes {
-        name
-        link
-      }
-    }
-  }
-`;
+// const query = graphql`
+//   query Layout {
+//     navigation: allNavigationYaml {
+//       nodes {
+//         name
+//         link
+//       }
+//     }
+//   }
+// `;

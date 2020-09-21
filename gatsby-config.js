@@ -54,6 +54,18 @@ module.exports = {
         trackingId: config.googleAnalyticsID,
       },
     },
+    {
+      resolve: 'gatsby-transformer-yaml-full',
+      options: {
+        plugins: [
+          {
+            resolve: 'gatsby-yaml-full-markdown',
+          },
+        ],
+      },
+    },
+    'gatsby-plugin-catch-links',
+    'gatsby-transformer-remark',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sitemap',
