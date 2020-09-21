@@ -1,3 +1,5 @@
+import { Dispatch, RefObject, SetStateAction } from 'react';
+
 export type ChildImageSharp = {
   childImageSharp: {
     fluid: {
@@ -25,4 +27,47 @@ export type TranformType = {
 export type TransitionType = {
   speed: string;
   easing: string;
+};
+
+export type InfoType = {
+  title: string;
+  desc: string;
+  md?: string;
+};
+
+export type QueryRoom = {
+  title_detail: string;
+  title: string;
+  desc: string;
+  slug: string;
+  next: string;
+  prev: string;
+  leftWallText: string;
+  rightWallText: string;
+  centerWallText: string;
+};
+
+export type QueryImages = {
+  nodes: {
+    name: string;
+    childImageSharp: ChildImageSharp;
+  };
+};
+
+export type MoveOptions = {
+  transition?: TransitionType;
+  transform?: TranformType;
+  stopTransition?: boolean;
+};
+
+export type ContentProps = {
+  room: QueryRoom;
+  scrollerRef: RefObject<HTMLDivElement>;
+  isMoving: boolean;
+  isZoomed: boolean;
+  isMenuOpen: boolean;
+  onGoBack: () => void;
+  onRemoveTilt: () => void;
+  onMove: (el: HTMLDivElement, options: MoveOptions) => Promise<unknown>;
+  onToggleMenu: (toggle: boolean) => void;
 };

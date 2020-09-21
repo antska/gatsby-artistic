@@ -6,7 +6,7 @@ import SEO from '../components/SEO';
 import Gallery from '../components/Gallery';
 import Content from '../components/Content';
 import { applyRoomTransform, applyRoomTransition } from '../utils';
-import { TranformType, TransitionType } from '../types';
+import { QueryImages, QueryRoom } from 'types';
 import {
   initTransform,
   initTransition,
@@ -19,7 +19,14 @@ import {
 } from '../constants';
 import GlobalStyles from '../styles/global';
 
-const Room = ({ data: { room, images } }) => {
+type RoomProps = {
+  data: {
+    room: QueryRoom;
+    images: QueryImages;
+  };
+};
+
+const Room = ({ data: { room, images } }: RoomProps) => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [win, setWin] = useState({
     width: window.innerWidth,
@@ -29,8 +36,7 @@ const Room = ({ data: { room, images } }) => {
   const [tilt, setTilt] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isInfoOpen, setIsInfoOpen] = useState(false);
-  const resolverRef = useRef(null);
+  const resolveRef = useRef<Function>();
 
   const getMousePos = (e: MouseEvent) => {
     let posx = 0;
@@ -126,15 +132,7 @@ const Room = ({ data: { room, images } }) => {
 
   const move = (
     element: HTMLDivElement,
-    {
-      transition,
-      transform,
-      stopTransition = false,
-    }: {
-      transition: TransitionType;
-      transform: TranformType;
-      stopTransition?: boolean;
-    },
+    { transition, transform, stopTransition = false }: MoveProps,
   ) =>
     new Promise((resolve) => {
       if (isMoving && !stopTransition) {
@@ -148,7 +146,7 @@ const Room = ({ data: { room, images } }) => {
 
       if (transform) {
         applyRoomTransform(element, transform);
-        resolverRef.current = resolve;
+        resolveRef.current = resolve;
       } else {
         resolve();
       }
@@ -160,53 +158,38 @@ const Room = ({ data: { room, images } }) => {
         return false;
       }
 
-      if (toggle) {
-        setTilt(false);
-        applyRoomTransition(scrollerRef.current, menuTransition);
-        await move(scrollerRef.current, {
-          transform: menuTransform,
-          stopTransition: true,
-        });
-        setIsMenuOpen(true);
-      } else {
-        applyRoomTransition(scrollerRef.current, roomTransition);
-        await move(scrollerRef.current, {
-          transform: resetTransform,
-          stopTransition: true,
-        });
-        initTilt(scrollerRef.current);
-        setIsMenuOpen(false);
+      if (scrollerRef.current) {
+        if (toggle) {
+          setTilt(false);
+          applyRoomTransition(scrollerRef.current, menuTransition);
+          await move(scrollerRef.current, {
+            transform: menuTransform,
+            stopTransition: true,
+          });
+          setIsMenuOpen(true);
+        } else {
+          applyRoomTransition(scrollerRef.current, roomTransition);
+          await move(scrollerRef.current, {
+            transform: resetTransform,
+            stopTransition: true,
+          });
+          initTilt(scrollerRef.current);
+          setIsMenuOpen(false);
+        }
       }
     },
     [scrollerRef.current, isMoving, tilt],
   );
 
-  const toggleInfo = useCallback(
-    async (toggle) => {
-      if (isMoving) {
-        return false;
-      }
-
-      if (toggle) {
-        setTilt(false);
-        applyRoomTransition(scrollerRef.current, menuTransition);
-        await move(scrollerRef.current, {
-          transform: menuTransform,
-          stopTransition: true,
-        });
-        setIsMenuOpen(true);
-      } else {
-        applyRoomTransition(scrollerRef.current, roomTransition);
-        await move(scrollerRef.current, {
-          transform: resetTransform,
-          stopTransition: true,
-        });
-        initTilt(scrollerRef.current);
-        setIsMenuOpen(false);
-      }
-    },
-    [scrollerRef.current, isMoving, tilt],
-  );
+  const handleZoom = () => {
+    setIsZoomed(true);
+    if (scrollerRef.current) {
+      move(scrollerRef.current, {
+        transform: resetTransform,
+        stopTransition: true,
+      });
+    }
+  };
 
   return (
     <>
@@ -217,28 +200,20 @@ const Room = ({ data: { room, images } }) => {
         images={images}
         ref={scrollerRef}
         isZoomed={isZoomed}
-        resolverRef={resolverRef}
-        onZoom={() => {
-          setIsZoomed(true);
-          move(scrollerRef.current, {
-            transform: resetTransform,
-            stopTransition: true,
-          });
-        }}
-        onSetIsMoving={setIsMoving}
+        resolveRef={resolveRef}
+        onZoom={handleZoom}
+        onSetIsMoving={(val: boolean) => setIsMoving(val)}
       />
       <Content
         room={room}
         isZoomed={isZoomed}
         isMoving={isMoving}
         isMenuOpen={isMenuOpen}
-        isInfoOpen={isInfoOpen}
         scrollerRef={scrollerRef}
         onMove={move}
         onGoBack={() => setIsZoomed(false)}
         onToggleMenu={toggleMenu}
-        onToggleInfo={toggleInfo}
-        onRemoveTilt={setTilt}
+        onRemoveTilt={() => setTilt(false)}
       />
     </>
   );

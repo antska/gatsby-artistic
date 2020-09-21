@@ -1,8 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { MutableRefObject, useEffect, useState } from 'react';
 import Img from 'gatsby-image';
 
-const Gallery = React.forwardRef<HTMLDivElement>(
-  ({ room, images, isZoomed, onZoom, onSetIsMoving, resolverRef }, ref) => {
+import { QueryRoom } from 'types';
+
+type GalleryProps = {
+  room: QueryRoom;
+  images: any;
+  isZoomed: boolean;
+  onZoom: () => void;
+  onSetIsMoving: (val: boolean) => void;
+  resolveRef: MutableRefObject<Function | undefined>;
+};
+
+const Gallery = React.forwardRef<HTMLDivElement, GalleryProps>(
+  ({ room, images, isZoomed, onZoom, onSetIsMoving, resolveRef }, ref) => {
     const [leftZoom, setLeftZoom] = useState(false);
     const [rightZoom, setRightZoom] = useState(false);
     const [backZoom, setBackZoom] = useState(false);
@@ -21,8 +32,10 @@ const Gallery = React.forwardRef<HTMLDivElement>(
           className="scroller"
           ref={ref}
           onTransitionEnd={() => {
-            resolverRef.current();
-            onSetIsMoving(false);
+            if (resolveRef.current) {
+              resolveRef.current();
+              onSetIsMoving(false);
+            }
           }}
         >
           <div key={room.title} className="room room--current">

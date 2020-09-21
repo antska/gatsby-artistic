@@ -1,66 +1,73 @@
 import React from 'react';
-import { useStaticQuery, graphql, Link } from 'gatsby';
-import { slide as Menu } from 'react-burger-menu';
 
-import logo from '../../static/logos/logo.gif';
-import { Header } from '../elements';
+type NavbarProps = {
+  isZoomed: boolean;
+  room: any;
+  onGoBack: () => void;
+  onNavigate: (dir: string) => void;
+};
 
-interface QueryResult {
-  navigation: {
-    nodes: {
-      name: string;
-      link: string;
-    }[];
-  };
-}
-
-const Navbar: React.FunctionComponent = () => {
-  // const data: QueryResult = useStaticQuery(query);
-
+const Navbar = ({ isZoomed, room, onGoBack, onNavigate }: NavbarProps) => {
   return (
-    <>
-      <Menu
-        right
-        pageWrapId="page-wrap"
-        outerContainerId="outer-container"
-        customBurgerIcon={
+    <nav
+      className="nav"
+      style={{
+        justifyContent: isZoomed ? 'center' : '',
+      }}
+    >
+      {!isZoomed && room.prev && (
+        <button
+          onClick={() => onNavigate('left')}
+          title="Go left"
+          type="button"
+          className="btn btn--nav btn--nav-left"
+        >
           <svg
-            fill="none"
-            height="17"
-            viewBox="0 0 36 17"
-            width="36"
-            xmlns="http://www.w3.org/2000/svg"
+            className="nav-icon nav-icon--left"
+            width="42px"
+            height="12px"
+            viewBox="0 0 70 20"
           >
-            <g fill="#000">
-              <path d="m0 0h36v3h-36z" />
-              <path d="m0 7h36v3h-36z" />
-              <path d="m0 14h36v3h-36z" />
-            </g>
+            <path className="nav__triangle" d="M52.5,10L70,0v20L52.5,10z" />
+            <path className="nav__line" d="M55.1,11.4H0V8.6h55.1V11.4z" />
           </svg>
-        }
-      >
-        {/* {data.navigation.nodes.map((item) => (
-          <Link className="menu-item" to={item.link} key={item.name}>
-            {item.name}
-          </Link>
-        ))} */}
-      </Menu>
-      <Header justifyContent="flex-start">
-        <img style={{ marginTop: 10, marginLeft: 10 }} alt="logo" src={logo} />
-      </Header>
-    </>
+        </button>
+      )}
+      {!isZoomed && (
+        <h2 className="room-desc room-title" style={{ fontSize: '1em' }}>
+          {room.title}
+        </h2>
+      )}
+      {isZoomed && (
+        <button
+          title="Go back"
+          type="button"
+          className="btn btn--nav btn--go-back"
+          onClick={onGoBack}
+        >
+          GO BACK
+        </button>
+      )}
+      {!isZoomed && room.next && (
+        <button
+          onClick={() => onNavigate('right')}
+          title="Go Right"
+          type="button"
+          className="btn btn--nav btn--nav-right"
+        >
+          <svg
+            className="nav-icon nav-icon--right"
+            width="42px"
+            height="12px"
+            viewBox="0 0 70 20"
+          >
+            <path className="nav__triangle" d="M52.5,10L70,0v20L52.5,10z" />
+            <path className="nav__line" d="M55.1,11.4H0V8.6h55.1V11.4z" />
+          </svg>
+        </button>
+      )}
+    </nav>
   );
 };
 
 export default Navbar;
-
-// const query = graphql`
-//   query Layout {
-//     navigation: allNavigationYaml {
-//       nodes {
-//         name
-//         link
-//       }
-//     }
-//   }
-// `;
