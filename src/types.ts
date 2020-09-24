@@ -1,4 +1,4 @@
-import { Dispatch, RefObject, SetStateAction } from 'react';
+import { RefObject } from 'react';
 
 export type ChildImageSharp = {
   childImageSharp: {
@@ -51,6 +51,15 @@ export type QueryImages = {
   nodes: {
     name: string;
     childImageSharp: ChildImageSharp;
+  };
+};
+
+export type QueryNavigation = {
+  navigation: {
+    nodes: {
+      title: string;
+      desc: string;
+    }[];
   };
 };
 

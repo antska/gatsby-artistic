@@ -1,10 +1,31 @@
-import { navigate } from 'gatsby';
 import React, { useCallback, useState } from 'react';
+import { navigate } from 'gatsby';
+import styled from 'styled-components';
 
 import { ContentProps, InfoType } from 'types';
-import Header from './Header';
-import Navbar from './Navbar';
-import OverlayMenu from './OverlayMenu';
+import theme from '../../../config/theme';
+import Header from '../Header';
+import Navbar from '../Navbar';
+import OverlayMenu from '../OverlayMenu';
+
+const SVerticalTitle = styled.h4`
+  font-size: 1em;
+  font-weight: normal;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  margin: 0 1.5em;
+  padding: 6em 0;
+  text-align: center;
+  pointer-events: none;
+  color: ${theme.colors.primary};
+  writing-mode: vertical-rl;
+
+  @media screen and (max-width: ${theme.breakpoints[1]}) {
+    font-size: 0.75em;
+  }
+`;
 
 const Content = ({
   room,
@@ -73,30 +94,28 @@ const Content = ({
   }, [info, isMoving, isMenuOpen, onToggleMenu]);
 
   return (
-    <>
-      <div className="content">
-        <Header
-          isMenuOpen={isMenuOpen}
-          isMoving={isMoving}
-          isZoomed={isZoomed}
-          onToggle={toggle}
-        />
-        <OverlayMenu
-          info={info}
-          isMenuOpen={isMenuOpen}
-          onMenuClick={onMenuClick}
-        />
-        <h4 className="location">
-          Euphrosyne Doxiades - Samson and Delilah painting
-        </h4>
-        <Navbar
-          room={room}
-          isZoomed={isZoomed}
-          onGoBack={onGoBack}
-          onNavigate={handleNavigate}
-        />
-      </div>
-    </>
+    <div>
+      <Header
+        isMenuOpen={isMenuOpen}
+        isMoving={isMoving}
+        isZoomed={isZoomed}
+        onToggle={toggle}
+      />
+      <OverlayMenu
+        info={info}
+        isMenuOpen={isMenuOpen}
+        onMenuClick={onMenuClick}
+      />
+      <SVerticalTitle>
+        Euphrosyne Doxiades - Samson and Delilah painting
+      </SVerticalTitle>
+      <Navbar
+        room={room}
+        isZoomed={isZoomed}
+        onGoBack={onGoBack}
+        onNavigate={handleNavigate}
+      />
+    </div>
   );
 };
 

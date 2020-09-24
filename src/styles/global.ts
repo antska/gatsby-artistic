@@ -3,12 +3,13 @@ import 'typeface-work-sans';
 
 import theme from '../../config/theme';
 import reset from './reset';
-import demo from './demo';
 import burger from './burger-menu';
 
 const GlobalStyles = createGlobalStyle`
+  *,
   *::before,
   *::after {
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
   ::selection {
@@ -66,62 +67,40 @@ const GlobalStyles = createGlobalStyle`
       }
     }
   }
+
   body {
     border: 0;
     margin: 0;
     padding: 0;
-    color: black;
+    color: ${theme.colors.darkBlue};
+    letter-spacing: 0.1em;
+    height: 100vh;
+    overflow: hidden;
     font-family: 'Work Sans', '-apple-system', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    background: white;
+    background: ${theme.colors.darkGrey};
     font-size: 18px;    
   }
+
   a {
     transition: all 0.3s ease-in-out;
     color: black;
     text-decoration: none;
     outline: none;
+
     &:hover,
     &:focus {
       color: ${theme.colors.primary};
     }
   }
-  ul{   
+  
+  ul {   
     margin-inline-start: 1em;
   }
-  li{
+
+  li {
     margin: 1em 0;
   }
-
-  .svg-icon {
-    width: 12em;
-    height: 12em;
-  }
   
-  .svg-icon path,
-  .svg-icon polygon,
-  .svg-icon rect {
-    fill: #4691f6;
-  }
-  
-  .svg-icon circle {
-    stroke: #4691f6;
-    stroke-width: 1;
-  }
-
-  .ml12 {
-    font-weight: 200;
-    font-size: 1.8em;
-    text-transform: uppercase;
-    letter-spacing: 0.5em;
-    color: #c2292e;
-  }
-  
-  .ml12 .letter {
-    display: inline-block;
-    line-height: 1em;
-  }
-
-  ${demo}
   ${reset}
   ${burger}
 `;

@@ -1,5 +1,6 @@
 - title: 'Eyewitnesses'
-  desc: "In looking at the National Gallery's Samson and Delilah we are
+  desc: !markdown |
+    In looking at the National Gallery's Samson and Delilah we are
     particularly fortunate to have the visual testimony of two
     eyewitnesses. Two artists, both contemporaries of Rubens and the
     painting's owner Nicholas Rockox, made separate copies of Rubens'
@@ -7,9 +8,10 @@
     to this day, and agree on major points of composition which are
     strikingly different to that of the painting hanging in the
     National Gallery. No reasonable explanation for this has ever been
-    given."
+    given.
 - title: 'Provenance'
-  desc: "The Samson and Delilah's provenance – its whereabouts over the
+  desc: !markdown |
+    The Samson and Delilah's provenance – its whereabouts over the
     years – is complex and uncertain. In reality, there are only two
     things of which we can be absolutely certain. The first is that
     Rubens painted a Samson and Delilah in the year or so after his
@@ -28,29 +30,30 @@
     you believe it to be the same painting that disappeared in 1641)
     was discovered by the art dealer Curt Benedict in the hands of a
     restorer in Paris in 1929, and was at first attributed to the 17th
-    century Dutch painter Gerrit van Honthorst."
+    century Dutch painter Gerrit van Honthorst.
 - title: 'The debate'
-  md: !markdown |
+  desc: !markdown |
     ## The Debate: 1980 - 2005
 
     Over the last ten days of October we will publish a chronology here of what we consider the key events and publications in the history of (and the controversy surrounding) the Samson and Delilah since it was purchased by the National Gallery in 1980.
 - title: 'Our aims'
-  desc: "Whatever the truth about the authorship of the Samson and Delilah
+  desc: !markdown |
+    Whatever the truth about the authorship of the Samson and Delilah
     it seems clear to us that with a few notable exceptions, only one side of
     the painting's fascinating story has been heard. Our aim is to widen the body
     of visual and historical evidence available on the subject, allowing people
     to make their own, fully informed, examination and judgment of the painting.
     We also hope to open up and make known a debate concerning a nationally owned
-    artwork - a debate that until now has been the domain of a narrow circle."
+    artwork - a debate that until now has been the domain of a narrow circle.
 - title: 'Resources'
-  md: !markdown |
-    ## 1992 Report to The National Gallery
+  desc: !markdown |
+    ### 1992 Report to The National Gallery
     In 1992, a group of painters submitted a report to the National Gallery outlining their concerns about the Samson and Delilah's attribution to Rubens.
     They had embarked on scholarly research into the painting some five years earlier as students at the Wimbledon School of Art in London, believing by looking closely at the Samson and Delilah as painters that it could not be by Rubens.
     <br/><br/>
     You can download a copy of that <a href="1992_Report_to_National_Gallery.pdf" target="_blank">1992 Report in PDF format</a>
     <br/><br/>
-    ## National Gallery Press Releases
+    ### National Gallery Press Releases
     We have received several comments noting that we have only published one side of the case, and asking what the National Gallery's response to criticism of the Samson and Delilah has been over the years.
     <br/><br/>
     In October 1997, in response to a series of articles questioning the Samson and Delilah's authenticity, the National Gallery issued a press release, which clearly stated their position at the time. In fact, they issued two almost identical press releases a short time apart - one ends with a paragraph which calls for a public lecture and debate, while in the other that final paragraph is not there.
@@ -79,7 +82,7 @@
 
       We agree, and hope that eight years later a genuinely inclusive debate can take place.
 - title: 'FAQ'
-  md: !markdown |
+  desc: !markdown |
     #### Who is responsible for afterRubens?
     afterRubens has been created by a group of people who are united by their belief that the ‘Samson and Delilah’ in the National Gallery is not by Rubens.
     Although they did not create the site and do not run it, the bulk of the research presented here is based upon the work of the painter and award-winning art-historian Euphrosyne Doxiadis, and two fellow painters Steve Harvey and Sian Hopkinson. We are also indebted to the work of a great many other academics, artists and journalists, most of whom have published work listed in the <a href="https://afterrubens.org/articles" target="_blank">Articles</a>  section of the website.

@@ -17,9 +17,14 @@ const theme: ThemeShape = {
   breakpoints: ['480px', '650px', '1000px', '1200px', '1400px'],
   fontSizes: ['1rem', '1.2rem', '1.44rem', '1.728rem', '2.074rem', '2.488rem'],
   colors: {
-    primary: '#c66131',
+    primary: '#c2292e',
     secondary: '#494992',
+    darkblue: '#1f1f21',
+    white: '#fff',
     grey: '#58545a',
+    darkGrey: '#2d2d2d',
+    beige: '#edd9bd',
+    brown: '#483023',
     shade: '#f5f5f5',
   },
   space: [

@@ -27,6 +27,7 @@ import {
   FontSizeProps,
   LayoutProps,
 } from 'styled-system';
+import theme from '../../config/theme';
 
 type BoxProps = SpaceProps &
   WidthProps &
@@ -104,15 +105,26 @@ export const AnimatedFlex = styled(animated.div)<AnimatedFlexCompProps>`
 
 AnimatedFlex.displayName = 'AnimatedFlex';
 
-type ButtonProps = SpaceProps & WidthProps & ColorProps;
+type ButtonProps = SpaceProps &
+  WidthProps &
+  ColorProps & { isMenuOpen?: boolean };
 
 export const Button = styled.button<ButtonProps>`
+  background: none;
   border-radius: 1000rem;
   border: none;
   font-weight: 700;
   font-size: 1.25rem;
+  margin: 0;
+  padding: 0;
+  position: relative;
   &:hover {
     cursor: pointer;
+    color: ${(props) =>
+      props.isMenuOpen ? theme.colors.darkblue : theme.colors.primary};
+  }
+  &:focus {
+    outline: none;
   }
   ${space}
   ${width}

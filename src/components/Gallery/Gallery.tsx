@@ -1,7 +1,17 @@
 import React, { MutableRefObject, useEffect, useState } from 'react';
-import Img from 'gatsby-image';
 
 import { QueryRoom } from 'types';
+import {
+  SContainer,
+  SRoom,
+  SRoomImg,
+  SRoomImgDescription,
+  SRoomSideBack,
+  SRoomSideBottom,
+  SRoomSideLeft,
+  SRoomSideRight,
+  SScroller,
+} from './styled';
 
 type GalleryProps = {
   room: QueryRoom;
@@ -27,9 +37,8 @@ const Gallery = React.forwardRef<HTMLDivElement, GalleryProps>(
     }, [isZoomed]);
 
     return (
-      <div className="container">
-        <div
-          className="scroller"
+      <SContainer>
+        <SScroller
           ref={ref}
           onTransitionEnd={() => {
             if (resolveRef.current) {
@@ -38,11 +47,9 @@ const Gallery = React.forwardRef<HTMLDivElement, GalleryProps>(
             }
           }}
         >
-          <div key={room.title} className="room room--current">
-            <div
-              className={`room__side room__side--back ${
-                backZoom && isZoomed ? 'room_zoomed' : ''
-              }`}
+          <SRoom key={room.title}>
+            <SRoomSideBack
+              isZoomed={backZoom && isZoomed}
               onClick={() => {
                 if (!backZoom) {
                   onZoom();
@@ -52,22 +59,16 @@ const Gallery = React.forwardRef<HTMLDivElement, GalleryProps>(
                 }
               }}
             >
-              <Img
+              <SRoomImg
                 fluid={images.nodes[2].childImageSharp.fluid}
-                className="room__img"
                 alt="Room img"
               />
-              <p
-                className="room__img--desc"
-                style={{ width: isZoomed ? 'auto' : '' }}
-              >
+              <SRoomImgDescription isZoomed={isZoomed}>
                 {room.centerWallText}
-              </p>
-            </div>
-            <div
-              className={`room__side room__side--left ${
-                leftZoom && isZoomed ? 'room_zoomed' : ''
-              }`}
+              </SRoomImgDescription>
+            </SRoomSideBack>
+            <SRoomSideLeft
+              isZoomed={leftZoom && isZoomed}
               onClick={() => {
                 if (!leftZoom) {
                   onZoom();
@@ -77,17 +78,16 @@ const Gallery = React.forwardRef<HTMLDivElement, GalleryProps>(
                 }
               }}
             >
-              <Img
+              <SRoomImg
                 fluid={images.nodes[1].childImageSharp.fluid}
-                className="room__img"
                 alt="Room img"
               />
-              <p className="room__img--desc">{room.leftWallText}</p>
-            </div>
-            <div
-              className={`room__side room__side--right ${
-                rightZoom && isZoomed ? 'room_zoomed' : ''
-              }`}
+              <SRoomImgDescription isZoomed={isZoomed}>
+                {room.leftWallText}
+              </SRoomImgDescription>
+            </SRoomSideLeft>
+            <SRoomSideRight
+              isZoomed={rightZoom && isZoomed}
               onClick={() => {
                 if (!rightZoom) {
                   onZoom();
@@ -97,26 +97,20 @@ const Gallery = React.forwardRef<HTMLDivElement, GalleryProps>(
                 }
               }}
             >
-              <p
-                className="room__img--desc"
-                style={{ marginRight: 0, marginLeft: '4%' }}
-              >
+              <SRoomImgDescription isZoomed={isZoomed} isRight>
                 {room.rightWallText}
-              </p>
-              <Img
+              </SRoomImgDescription>
+              <SRoomImg
                 fluid={images.nodes[0].childImageSharp.fluid}
-                className="room__img"
                 alt="Room img"
               />
-            </div>
-            <div className="room__side room__side--bottom" />
-          </div>
-        </div>
-      </div>
+            </SRoomSideRight>
+            <SRoomSideBottom />
+          </SRoom>
+        </SScroller>
+      </SContainer>
     );
   },
 );
 
 export default Gallery;
-
-Gallery.displayName = 'Gallery';
